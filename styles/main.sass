@@ -1,6 +1,8 @@
-$grey: #333333
-$background: #becadd
+$grey: #555555
+$dark-grey: #222222
+$background: #e8eef7
 $grid-blue: #2d5391
+$blue: #3a85ff
 
 html
     background-color: $background
@@ -40,6 +42,23 @@ html
     top: 0
     margin: 0
 
+    #output-window
+        display: block
+        width: 420px
+        height: 200px
+        background-color: $dark-grey
+        border-radius: 10px
+        margin: 20px 0 0 20px
+        overflow: auto
+
+        #output-text
+            font-family: 'Courier', monospace
+            font-size: 16px
+            color: $blue
+            line-height: 20px
+            text-align: left
+            margin: 10px 15px
+
 #right-pane
     display: block
     width: 40%
@@ -47,7 +66,6 @@ html
     right: 0
     top: 0
     margin: 0
-    text-align: center
 
     .grid
         display: inline-block
@@ -98,7 +116,7 @@ html
     line-height: 24px
     font-weight: bold
     color: $grey
-    text-align: center
+    margin: 30px 0 10px 20px
 
 .ship-container
     display: inline-block
