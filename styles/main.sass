@@ -15,6 +15,23 @@ html
     margin: 10px 15px
     padding: 0
 
+.heading
+    font-family: 'Roboto', sans-serif
+    font-size: 20px
+    line-height: 20px
+    margin: 10px 20px
+    padding: 0
+    color: black
+    font-weight: normal
+    font-style: italic
+
+.author
+    font-family: 'Roboto', sans-serif
+    font-size: 16px
+    color: black
+    line-height: 16px
+    margin: 10px 20px
+
 #left-pane
     display: block
     width: 60%
@@ -33,12 +50,12 @@ html
     text-align: center
 
     .grid
-        display: block
+        display: inline-block
         background-color: $grid-blue
         font-size: 0
         width: 330px
         border: 1px solid white
-        margin: 0 auto
+        margin: 0 20px
 
         .space
             display: inline-block
@@ -66,6 +83,14 @@ html
                 margin: 4px
                 background-color: none
 
+            .miss
+                background-color: white
+
+            .hit
+                background-color: red
+                border: 2px solid red
+
+
 .grid-title
     text-transform: uppercase
     font-family: 'Roboto', sans-serif
@@ -74,3 +99,38 @@ html
     font-weight: bold
     color: $grey
     text-align: center
+
+.ship-container
+    display: inline-block
+    text-align: left
+    vertical-align: top
+    width: 150px
+    margin: 0 20px 0 0
+
+    .ships-remaining
+        font-family: 'Roboto', sans-serif
+        font-size: 18px
+        line-height: 18px
+        font-weight: normal
+        color: black
+        margin: 0 0 10px 0
+
+    .ship
+        display: inline-block
+        max-width: 150px
+        background-color: $grey
+        border-radius: 10px
+        margin: 10px 0
+        font-size: 0
+        overflow: hidden
+
+        .ship-marker
+            display: inline-block
+            background-color: none
+            margin: 0
+            padding: 0
+            width: 30px
+            height: 20px
+
+        .hit
+            background-color: red
