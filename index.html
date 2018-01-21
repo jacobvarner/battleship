@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Battleship</title>
+        <meta name="description" content="A simple Battleship game built with HTML, Sass, and JavaScript.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900" rel="stylesheet">
+        <link rel="stylesheet" href="styles/normalize.css">
+        <link rel="stylesheet" href="styles/main.min.css">
+        <script src="main.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div id="left-pane">
+            <h1 id="title">Battleship</h1>
+            <div id="output-window">
+
+            </div>
+            <div id="control-window">
+
+            </div>
+        </div>
+        <div id="right-pane">
+            <h3 id="opponent-grid-title" class="grid-title">Opponent</h3>
+            <div id="opponent-grid" class="grid">
+                <div class="space"><span class="label"></span></div>
+                <div class="space"><span class="label">0</span></div>
+                <div class="space"><span class="label">1</span></div>
+                <div class="space"><span class="label">2</span></div>
+                <div class="space"><span class="label">3</span></div>
+                <div class="space"><span class="label">4</span></div>
+                <div class="space"><span class="label">5</span></div>
+                <div class="space"><span class="label">6</span></div>
+                <div class="space"><span class="label">7</span></div>
+                <div class="space"><span class="label">8</span></div>
+                <div class="space"><span class="label">9</span></div>
+                <div class="space"><span class="label">A</span></div>
+                <div id="o-A0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-A1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-A2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-A3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-A4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-A5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-A6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-A7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-A8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-A9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space"><span class="label">B</span></div>
+                <div id="o-B0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-B1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-B2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-B3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-B4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-B5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-B6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-B7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-B8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-B9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space"><span class="label">C</span></div>
+                <div id="o-C0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-C1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-C2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-C3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-C4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-C5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-C6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-C7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-C8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-C9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space"><span class="label">D</span></div>
+                <div id="o-D0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-D1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-D2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-D3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-D4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-D5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-D6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-D7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-D8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-D9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space"><span class="label">E</span></div>
+                <div id="o-E0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-E1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-E2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-E3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-E4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-E5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-E6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-E7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-E8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-E9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space"><span class="label">F</span></div>
+                <div id="o-F0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-F1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-F2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-F3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-F4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-F5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-F6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-F7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-F8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-F9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space"><span class="label">G</span></div>
+                <div id="o-G0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-G1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-G2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-G3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-G4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-G5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-G6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-G7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-G8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-G9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space"><span class="label">H</span></div>
+                <div id="o-H0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-H1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-H2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-H3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-H4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-H5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-H6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-H7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-H8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-H9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space"><span class="label">I</span></div>
+                <div id="o-I0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-I1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-I2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-I3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-I4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-I5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-I6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-I7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-I8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-I9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space"><span class="label">J</span></div>
+                <div id="o-J0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-J1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-J2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-J3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-J4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-J5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-J6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-J7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-J8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="o-J9" class="space">
+                    <span class="marker"></span>
+                </div>
+            </div>
+            <h3 id="player-grid-title" class="grid-title">Player</h3>
+            <div id="player-grid" class="grid">
+                <div class="space">
+                    <span class="label"></span>
+                </div>
+                <div class="space">
+                    <span class="label">0</span>
+                </div>
+                <div class="space">
+                    <span class="label">1</span>
+                </div>
+                <div class="space">
+                    <span class="label">2</span>
+                </div>
+                <div class="space">
+                    <span class="label">3</span>
+                </div>
+                <div class="space">
+                    <span class="label">4</span>
+                </div>
+                <div class="space">
+                    <span class="label">5</span>
+                </div>
+                <div class="space">
+                    <span class="label">6</span>
+                </div>
+                <div class="space">
+                    <span class="label">7</span>
+                </div>
+                <div class="space">
+                    <span class="label">8</span>
+                </div>
+                <div class="space">
+                    <span class="label">9</span>
+                </div>
+                <div class="space">
+                    <span class="label">A</span>
+                </div>
+                <div id="p-A0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-A1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-A2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-A3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-A4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-A5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-A6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-A7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-A8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-A9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space">
+                    <span class="label">B</span>
+                </div>
+                <div id="p-B0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-B1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-B2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-B3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-B4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-B5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-B6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-B7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-B8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-B9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space">
+                    <span class="label">C</span>
+                </div>
+                <div id="p-C0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-C1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-C2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-C3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-C4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-C5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-C6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-C7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-C8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-C9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space">
+                    <span class="label">D</span>
+                </div>
+                <div id="p-D0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-D1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-D2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-D3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-D4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-D5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-D6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-D7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-D8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-D9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space">
+                    <span class="label">E</span>
+                </div>
+                <div id="p-E0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-E1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-E2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-E3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-E4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-E5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-E6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-E7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-E8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-E9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space">
+                    <span class="label">F</span>
+                </div>
+                <div id="p-F0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-F1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-F2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-F3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-F4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-F5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-F6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-F7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-F8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-F9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space">
+                    <span class="label">G</span>
+                </div>
+                <div id="p-G0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-G1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-G2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-G3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-G4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-G5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-G6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-G7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-G8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-G9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space">
+                    <span class="label">H</span>
+                </div>
+                <div id="p-H0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-H1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-H2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-H3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-H4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-H5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-H6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-H7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-H8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-H9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space">
+                    <span class="label">I</span>
+                </div>
+                <div id="p-I0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-I1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-I2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-I3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-I4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-I5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-I6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-I7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-I8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-I9" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div class="space">
+                    <span class="label">J</span>
+                </div>
+                <div id="p-J0" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-J1" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-J2" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-J3" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-J4" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-J5" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-J6" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-J7" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-J8" class="space">
+                    <span class="marker"></span>
+                </div>
+                <div id="p-J9" class="space">
+                    <span class="marker"></span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
