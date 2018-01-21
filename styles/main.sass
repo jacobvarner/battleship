@@ -48,7 +48,7 @@ html
         height: 200px
         background-color: $dark-grey
         border-radius: 10px
-        margin: 20px 0 0 20px
+        margin: 40px 0 0 20px
         overflow: auto
 
         #output-text
@@ -58,6 +58,148 @@ html
             line-height: 20px
             text-align: left
             margin: 10px 15px
+    
+    #control-window
+        display: block
+        width: 420px
+        margin: 20px 0 0 20px
+
+        #ship-placement-container
+            display: block
+            margin: 40px 0 0 0
+
+            #ship-label
+                font-family: 'Roboto', sans-serif
+                font-size: 24px
+                line-height: 24px
+                color: black
+                margin: 0 0 20px 0
+
+                span
+                    font-size: 14px
+                    line-height: 24px
+                    display: inline-block
+                    height: 24px
+                    background-color: $grey
+                    max-width: 200px
+                    color: white
+                    border-radius: 10px
+                    vertical-align: bottom
+                    text-align: center
+
+                #place-carrier
+                    width: 200px
+                
+                #place-battleship
+                    width: 160px
+
+                #place-cruiser
+                    width: 120px
+                
+                #place-submarine
+                    width: 120px
+
+                #place-destroyer
+                    width: 80px
+        
+        #horizontal-label
+            display: inline-block
+            font-family: 'Roboto', sans-serif
+            font-size: 16px
+            line-height: 24px
+            margin: 0
+            vertical-align: middle
+
+        #vertical-label
+            display: inline-block
+            font-family: 'Roboto', sans-serif
+            font-size: 16px
+            line-height: 24px
+            margin: 0
+            vertical-align: middle
+
+        #orientation-toggle
+            display: inline-block
+            width: 40px
+            height: 20px
+            border-radius: 10px
+            background-color: black
+            vertical-align: middle
+            margin: 5px
+
+            #orientation-indicator
+                display: inline-block
+                vertical-align: middle
+                width: 24px
+                height: 24px
+                border-radius: 50%
+                background-color: $grey
+                margin: -2px 0
+                margin-left: 0px
+
+        #location-text
+            display: inline-block
+            font-family: 'Roboto', sans-serif
+            font-size: 18px
+            line-height: 24px
+            margin: 20px 0
+            vertical-align: middle
+
+        #placement-location
+            display: inline-block
+            width: 28px
+            height: 24px
+            font-size: 20px
+            line-height: 24px
+            padding: 2px 4px
+            margin: 0 5px
+            vertical-align: middle
+
+        #placement-button
+            display: inline-block
+            height: 28px
+            background-color: $blue
+            color: white
+            font-family: 'Roboto', sans-serif
+            font-size: 16px
+            line-height: 28px
+            vertical-align: middle
+            border: none
+            border-radius: 4px
+
+        #firing-container
+            display: block
+            margin: 40px 0 0 0
+
+        #fire-text
+            display: inline-block
+            font-family: 'Roboto', sans-serif
+            font-size: 18px
+            line-height: 24px
+            margin: 20px 0
+            vertical-align: middle
+
+        #fire-location
+            display: inline-block
+            width: 28px
+            height: 24px
+            font-size: 20px
+            line-height: 24px
+            padding: 2px 4px
+            margin: 0 5px
+            vertical-align: middle
+
+        #fire-button
+            display: inline-block
+            height: 28px
+            background-color: red
+            color: white
+            font-family: 'Roboto', sans-serif
+            font-size: 16px
+            line-height: 28px
+            vertical-align: middle
+            border: none
+            border-radius: 4px
 
 #right-pane
     display: block
@@ -107,7 +249,6 @@ html
             .hit
                 background-color: red
                 border: 2px solid red
-
 
 .grid-title
     text-transform: uppercase

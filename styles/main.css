@@ -47,7 +47,7 @@ html {
   height: 200px;
   background-color: #222222;
   border-radius: 10px;
-  margin: 20px 0 0 20px;
+  margin: 40px 0 0 20px;
   overflow: auto;
 }
 
@@ -58,6 +58,168 @@ html {
   line-height: 20px;
   text-align: left;
   margin: 10px 15px;
+}
+
+#left-pane #control-window {
+  display: block;
+  width: 420px;
+  margin: 20px 0 0 20px;
+}
+
+#left-pane #control-window #ship-placement-container {
+  display: block;
+  margin: 40px 0 0 0;
+}
+
+#left-pane #control-window #ship-placement-container #ship-label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+  color: black;
+  margin: 0 0 20px 0;
+}
+
+#left-pane #control-window #ship-placement-container #ship-label span {
+  font-size: 14px;
+  line-height: 24px;
+  display: inline-block;
+  height: 24px;
+  background-color: #555555;
+  max-width: 200px;
+  color: white;
+  border-radius: 10px;
+  vertical-align: bottom;
+  text-align: center;
+}
+
+#left-pane #control-window #ship-placement-container #ship-label #place-carrier {
+  width: 200px;
+}
+
+#left-pane #control-window #ship-placement-container #ship-label #place-battleship {
+  width: 160px;
+}
+
+#left-pane #control-window #ship-placement-container #ship-label #place-cruiser {
+  width: 120px;
+}
+
+#left-pane #control-window #ship-placement-container #ship-label #place-submarine {
+  width: 120px;
+}
+
+#left-pane #control-window #ship-placement-container #ship-label #place-destroyer {
+  width: 80px;
+}
+
+#left-pane #control-window #horizontal-label {
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+  vertical-align: middle;
+}
+
+#left-pane #control-window #vertical-label {
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+  vertical-align: middle;
+}
+
+#left-pane #control-window #orientation-toggle {
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: black;
+  vertical-align: middle;
+  margin: 5px;
+}
+
+#left-pane #control-window #orientation-toggle #orientation-indicator {
+  display: inline-block;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #555555;
+  margin: -2px 0;
+  margin-left: 0px;
+}
+
+#left-pane #control-window #location-text {
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  margin: 20px 0;
+  vertical-align: middle;
+}
+
+#left-pane #control-window #placement-location {
+  display: inline-block;
+  width: 28px;
+  height: 24px;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 2px 4px;
+  margin: 0 5px;
+  vertical-align: middle;
+}
+
+#left-pane #control-window #placement-button {
+  display: inline-block;
+  height: 28px;
+  background-color: #3a85ff;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 28px;
+  vertical-align: middle;
+  border: none;
+  border-radius: 4px;
+}
+
+#left-pane #control-window #firing-container {
+  display: block;
+  margin: 40px 0 0 0;
+}
+
+#left-pane #control-window #fire-text {
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  margin: 20px 0;
+  vertical-align: middle;
+}
+
+#left-pane #control-window #fire-location {
+  display: inline-block;
+  width: 28px;
+  height: 24px;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 2px 4px;
+  margin: 0 5px;
+  vertical-align: middle;
+}
+
+#left-pane #control-window #fire-button {
+  display: inline-block;
+  height: 28px;
+  background-color: red;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 28px;
+  vertical-align: middle;
+  border: none;
+  border-radius: 4px;
 }
 
 #right-pane {

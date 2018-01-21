@@ -28,7 +28,23 @@
                 <p id="output-text">This is some dummy output text to be displayed in the output window.<br/><br/>This is a second line of text.</p>
             </div>
             <div id="control-window">
-
+                <div id="ship-placement-container">
+                    <p id="ship-label">Place the: <span id="place-carrier">Carrier</span></p>
+                    <p id="horizontal-label">Horizontally</p>
+                    <div id="orientation-toggle">
+                        <span id="orientation-indicator"></span>
+                    </div>
+                    <p id="vertical-label">Vertically</p>
+                    <br/>
+                    <p id="location-text">Starting at</p>
+                    <input id="placement-location" type="text" width="2" placeholder="A0">
+                    <button id="placement-button">Place</button>
+                </div>
+                <div id="firing-container">
+                    <p id="fire-text">Aim at</p>
+                    <input id="fire-location" type="text" width="2" placeholder="A0">
+                    <button id="fire-button">Fire</button>
+                </div>
             </div>
         </div>
         <div id="right-pane">
