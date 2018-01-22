@@ -3,6 +3,8 @@ $dark-grey: #222222
 $background: #e8eef7
 $grid-blue: #2d5391
 $blue: #3a85ff
+$title-grey1: #999999
+$title-grey2: #333333
 
 html
     background-color: $background
@@ -12,7 +14,9 @@ html
     font-family: 'Roboto', sans-serif
     font-size: 72px
     line-height: 72px
-    color: $grey
+    background: -webkit-linear-gradient($title-grey1, $title-grey2)
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
     font-weight: bolder
     margin: 10px 15px
     padding: 0
@@ -21,7 +25,7 @@ html
     font-family: 'Roboto', sans-serif
     font-size: 20px
     line-height: 20px
-    margin: 10px 20px
+    margin: 0px 20px
     padding: 0
     color: black
     font-weight: normal
@@ -35,12 +39,11 @@ html
     margin: 10px 20px
 
 #left-pane
-    display: block
-    width: 60%
-    position: fixed
-    left: 0
-    top: 0
+    display: inline-block
+    vertical-align: top
+    width: 600px
     margin: 0
+    padding-top: 30px
 
     #output-window
         display: block
@@ -65,7 +68,7 @@ html
         margin: 20px 0 0 20px
 
         #ship-placement-container
-            display: block
+            display: none
             margin: 40px 0 0 0
 
             #ship-label
@@ -168,7 +171,7 @@ html
             border-radius: 4px
 
         #firing-container
-            display: block
+            display: none
             margin: 40px 0 0 0
 
         #fire-text
@@ -201,13 +204,26 @@ html
             border: none
             border-radius: 4px
 
+        #menu-container
+            display: block
+            margin: 40px 0 0 0
+
+        #new-game
+            display: inline-block
+            padding: 5px 10px
+            color: white
+            background-color: $blue
+            font-family: 'Roboto', sans-serif
+            font-size: 20px
+            line-height: 30px
+            border-radius: 5px
+            border: none
+
 #right-pane
-    display: block
-    width: 40%
-    position: fixed
-    right: 0
-    top: 0
+    display: inline-block
+    width: 600px
     margin: 0
+    vertical-align: top
 
     .grid
         display: inline-block
@@ -236,11 +252,11 @@ html
 
             .marker
                 display: block
-                width: 16px
-                height: 16px
+                width: 12px
+                height: 12px
                 border: 2px solid white
                 border-radius: 50%
-                margin: 4px
+                margin: 6px
                 background-color: none
 
             .miss
