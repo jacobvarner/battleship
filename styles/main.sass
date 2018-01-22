@@ -1,7 +1,7 @@
 $grey: #555555
 $dark-grey: #222222
 $background: #e8eef7
-$grid-blue: #2d5391
+$grid-blue: #276bd8
 $blue: #3a85ff
 $title-grey1: #999999
 $title-grey2: #333333
@@ -90,19 +90,19 @@ html
                     vertical-align: bottom
                     text-align: center
 
-                #place-carrier
+                #place-Carrier
                     width: 200px
                 
-                #place-battleship
+                #place-Battleship
                     width: 160px
 
-                #place-cruiser
+                #place-Cruiser
                     width: 120px
                 
-                #place-submarine
+                #place-Submarine
                     width: 120px
 
-                #place-destroyer
+                #place-Destroyer
                     width: 80px
         
         #horizontal-label
@@ -137,8 +137,10 @@ html
                 height: 24px
                 border-radius: 50%
                 background-color: $grey
-                margin: -2px 0
-                margin-left: 0px
+                margin-top: -2px
+
+            .vertical
+                margin-left: 16px
 
         #location-text
             display: inline-block
@@ -243,6 +245,7 @@ html
             vertical-align: top
             text-align: center
 
+
             .label
                 font-size: 20px
                 color: white
@@ -265,6 +268,9 @@ html
             .hit
                 background-color: red
                 border: 2px solid red
+
+        .ship-space
+            background-color: $grey
 
 .grid-title
     text-transform: uppercase

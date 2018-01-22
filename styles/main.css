@@ -93,23 +93,23 @@ html {
   text-align: center;
 }
 
-#left-pane #control-window #ship-placement-container #ship-label #place-carrier {
+#left-pane #control-window #ship-placement-container #ship-label #place-Carrier {
   width: 200px;
 }
 
-#left-pane #control-window #ship-placement-container #ship-label #place-battleship {
+#left-pane #control-window #ship-placement-container #ship-label #place-Battleship {
   width: 160px;
 }
 
-#left-pane #control-window #ship-placement-container #ship-label #place-cruiser {
+#left-pane #control-window #ship-placement-container #ship-label #place-Cruiser {
   width: 120px;
 }
 
-#left-pane #control-window #ship-placement-container #ship-label #place-submarine {
+#left-pane #control-window #ship-placement-container #ship-label #place-Submarine {
   width: 120px;
 }
 
-#left-pane #control-window #ship-placement-container #ship-label #place-destroyer {
+#left-pane #control-window #ship-placement-container #ship-label #place-Destroyer {
   width: 80px;
 }
 
@@ -148,8 +148,11 @@ html {
   height: 24px;
   border-radius: 50%;
   background-color: #555555;
-  margin: -2px 0;
-  margin-left: 0px;
+  margin-top: -2px;
+}
+
+#left-pane #control-window #orientation-toggle .vertical {
+  margin-left: 16px;
 }
 
 #left-pane #control-window #location-text {
@@ -249,7 +252,7 @@ html {
 
 #right-pane .grid {
   display: inline-block;
-  background-color: #2d5391;
+  background-color: #276bd8;
   font-size: 0;
   width: 330px;
   border: 1px solid white;
@@ -292,6 +295,10 @@ html {
 #right-pane .grid .space .hit {
   background-color: red;
   border: 2px solid red;
+}
+
+#right-pane .grid .ship-space {
+  background-color: #555555;
 }
 
 .grid-title {
