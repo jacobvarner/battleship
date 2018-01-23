@@ -347,6 +347,7 @@ function resetGraphics() {
     turns = 0;
     playerGuesses = [];
     opponentGuesses = [];
+    $("#firing-container").css("display","none");
     $("#opponent-ships-remaining").text("Ships remaining: " + opponentShipsLeft);
     $("#player-ships-remaining").text("Ships remaining: " + playerShipsLeft);
     $(".ship-marker").removeClass("hit");
