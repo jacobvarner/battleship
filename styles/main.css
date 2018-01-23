@@ -226,6 +226,11 @@ html {
   border-radius: 4px;
 }
 
+#left-pane #control-window .disabled {
+  background-color: #555555 !important;
+  color: black !important;
+}
+
 #left-pane #control-window #menu-container {
   display: block;
   margin: 40px 0 0 0;

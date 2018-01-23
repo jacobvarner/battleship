@@ -182,13 +182,59 @@ function checkInputValue(value) {
 }
 
 function opponentTurn() {
-    console.log("Opponent guessed.");
-    turns++;
-    playerTurn();
+    var x, y;
+    
+    x = Math.floor(Math.random() * 10);
+    y = Math.floor(Math.random() * 10);
+
+    var target = [x, y];
+    var result = false;
+
+    if (locationInArray(opponentGuesses, target) != -1) {
+        opponentTurn();
+    } else {
+        for (var i = 0; i < 5; i++) {
+            var array = playerFleet[i].coordinates;
+            var location = locationInArray(array, target);
+            if (location === -1) {
+                continue;
+            } else {
+                result = true;
+                break;
+            }
+        }
+
+        if (result === false) {
+            $("#output-text").html("Whew, that was close! They missed.");
+            playerBoard[y][x] = 2;
+            $("#p-" + acceptedValues[y] + x + " > span").addClass("miss");
+            opponentGuesses.push(target);
+        } else {
+            $("#output-text").html("Yikes! You've been hit.<br/><br/>They hit your " + playerFleet[i].name + ".");
+            playerBoard[y][x] = 3;
+            $("#p-" + acceptedValues[y] + x + " > span").addClass("hit");
+            $("#p" + playerFleet[i].name + " span:not(.hit):first").addClass("hit");
+            playerFleet[i].hits++;
+            if (playerFleet[i].hits === playerFleet[i].size) {
+                $("#output-text").html("Yikes! You've been hit.<br/><br/>They sunk your " + playerFleet[i].name + "!");
+                playerShipsLeft--;
+                $("#player-ships-remaining").text("Ships remaining: " + playerShipsLeft);
+                if (playerShipsLeft === 0) {
+                    // 0 = player wins, 1 = opponent wins
+                    gameOver(1)
+                }
+            }
+            playerGuesses.push(target);
+        }
+        turns++;
+        $("#fire-button").prop("disabled", false);
+        playerTurn();
+    }
 }
 
 function playerTurn() {
-    var x, y;
+    $("#fire-button").removeClass("disabled");
+    var x, y, pause;
     $("#fire-button").unbind().click(function() {
         var inputValue = $("#fire-location").val();
         if (checkInputValue(inputValue) === false) {
@@ -224,7 +270,7 @@ function playerTurn() {
                 $("#output-text").html("Boom! That's a hit.<br/><br/>You hit their " + opponentFleet[i].name + ".");
                 opponentBoard[y][x] = 3;
                 $("#o-" + acceptedValues[y] + x + " > span").addClass("hit");
-                $("#" + opponentFleet[i].name + " span:not(.hit):first").addClass("hit");
+                $("#o" + opponentFleet[i].name + " span:not(.hit):first").addClass("hit");
                 opponentFleet[i].hits++;
                 if (opponentFleet[i].hits === opponentFleet[i].size) {
                     $("#output-text").html("Boom! That's a hit.<br/><br/>You sunk their " + opponentFleet[i].name + "!");
@@ -232,17 +278,17 @@ function playerTurn() {
                     $("#opponent-ships-remaining").text("Ships remaining: " + opponentShipsLeft);
                     if (opponentShipsLeft === 0) {
                         // 0 = player wins, 1 = opponent wins
-                        gameOver("0")
+                        gameOver(0)
                     }
                 }
                 playerGuesses.push(target);
             }
             turns++;
-            opponentTurn();
+            $("#fire-button").prop("disabled", true);
+            $("#fire-button").addClass("disabled");
+            pause = setTimeout(opponentTurn, 3000);
         }
-        
     });
-
 }
 
 function locationInArray(container, target) {
@@ -257,5 +303,5 @@ function locationInArray(container, target) {
 }
 
 function gameOver(winner) {
-
+    $("#firing-container").css("display","none");
 }
