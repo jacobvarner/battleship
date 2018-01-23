@@ -1,5 +1,7 @@
 var playing = false;
-var playerFleet, opponentFleet, playerBoard, opponentBoard;
+var playerFleet, opponentFleet, playerBoard, opponentBoard, playerShipsLeft = 5, opponentShipsLeft = 5, turns = 0;
+var playerGuesses = [];
+var opponentGuesses = [];
 
 var acceptedValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
@@ -36,17 +38,10 @@ function newGame() {
     opponentFleet = createFleet();
     playerBoard = createBoard();
     opponentBoard = createBoard();
-    console.log("New game has been strated.");
+    console.log("New game has been started.");
 
     $("#output-text").text("Your opponent is placing their ships. Hang tight.");
-    
     placeOpponentShips();
-
-    $("#output-text").text("Your opponent has placed their ships. It is now your turn to place your ships.");
-    $("#ship-placement-container").css("display", "block");
-    placePlayerShips();
-
-    playBattleship();
 }
 
 function createFleet() {
@@ -85,10 +80,6 @@ function createBoard() {
     return board;
 }
 
-function playBattleship() {
-
-}
-
 function placeOpponentShips() {
     var ship, orientation, x, y, shipLength;
     for (ship = 0; ship < 5; ship++) {
@@ -101,8 +92,7 @@ function placeOpponentShips() {
             y = Math.floor(Math.random() * 10);
         } while (placementCheck(opponentBoard, opponentFleet, ship, shipLength, orientation, x, y) === false);  
     }
-
-    return true;
+    placePlayerShips();
 }
 
 function placementCheck(board, fleet, shipNumber, shipLength, orientation, x, y) {
@@ -138,6 +128,9 @@ function placementCheck(board, fleet, shipNumber, shipLength, orientation, x, y)
 function placePlayerShips() {
     var ship = 0, orientation, x, y, shipLength;
 
+    $("#output-text").text("Your opponent has placed their ships. It is now your turn to place your ships.");
+    $("#ship-placement-container").css("display", "block");
+
     $("#placement-button").click(function(){
         shipLength = playerFleet[ship].size;
         if ($("#orientation-indicator").hasClass("vertical")) {
@@ -164,6 +157,7 @@ function placePlayerShips() {
                 $("#output-text").html("Great! All of your ships are in position and you are ready for battle.<br/><br/>You go first.");
                 $("#ship-placement-container").css("display", "none");
                 $("#firing-container").css("display", "block");
+                playerTurn();
             }
             $("#ship-label > span").attr("id", "place-" + playerFleet[ship].name).text(playerFleet[ship].name);
         } else {
@@ -188,9 +182,80 @@ function checkInputValue(value) {
 }
 
 function opponentTurn() {
-
+    console.log("Opponent guessed.");
+    turns++;
+    playerTurn();
 }
 
 function playerTurn() {
-    
+    var x, y;
+    $("#fire-button").unbind().click(function() {
+        var inputValue = $("#fire-location").val();
+        if (checkInputValue(inputValue) === false) {
+            alert("You must enter a valid Letter-Number pair with a letter before K and a positive number less than 10.\n\nEx. 'A3', 'C9', 'H5', etc.");
+        } else {
+            y = parseInt(inputValue[1]);
+            x = acceptedValues.indexOf(inputValue[0].toUpperCase());
+        }
+        
+        var target = [x,y];
+        var result = false;
+
+        if (locationInArray(playerGuesses, target) != -1) {
+            alert("You've already guessed that location. Please pick another valid location and fire again.");
+        } else {
+            for (var i = 0; i < 5; i++) {
+                var array = opponentFleet[i].coordinates;
+                var location = locationInArray(array, target);
+                if (location === -1) {
+                    continue;
+                } else {
+                    result = true;
+                    break;
+                }
+            }
+
+            if (result === false) {
+                $("#output-text").html("Unfortunately, that's a miss.");
+                opponentBoard[y][x] = 2;
+                $("#o-" + acceptedValues[y] + x + " > span").addClass("miss");
+                playerGuesses.push(target);
+            } else {
+                $("#output-text").html("Boom! That's a hit.<br/><br/>You hit their " + opponentFleet[i].name + ".");
+                opponentBoard[y][x] = 3;
+                $("#o-" + acceptedValues[y] + x + " > span").addClass("hit");
+                $("#" + opponentFleet[i].name + " span:not(.hit):first").addClass("hit");
+                opponentFleet[i].hits++;
+                if (opponentFleet[i].hits === opponentFleet[i].size) {
+                    $("#output-text").html("Boom! That's a hit.<br/><br/>You sunk their " + opponentFleet[i].name + "!");
+                    opponentShipsLeft--;
+                    $("#opponent-ships-remaining").text("Ships remaining: " + opponentShipsLeft);
+                    if (opponentShipsLeft === 0) {
+                        // 0 = player wins, 1 = opponent wins
+                        gameOver("0")
+                    }
+                }
+                playerGuesses.push(target);
+            }
+            turns++;
+            opponentTurn();
+        }
+        
+    });
+
+}
+
+function locationInArray(container, target) {
+    var container = container.map(JSON.stringify);
+    var target = JSON.stringify(target);
+    for (var i = 0; i < container.length; i++) {
+        if (container[i] == target) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function gameOver(winner) {
+
 }
