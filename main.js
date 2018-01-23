@@ -1,10 +1,13 @@
+// Initialize variables that are used throughout to track progression of the game and also aid in reseting for a new game.
 var playing = false;
 var playerFleet, opponentFleet, playerBoard, opponentBoard, playerShipsLeft = 5, opponentShipsLeft = 5, turns = 0;
 var playerGuesses = [];
 var opponentGuesses = [];
 
+// Used to move between using coordinate pairs of numbers with coordinate pairs containing a letter and a number
 var acceptedValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
+// Creates a ship object
 function Ship(name, size, hits=0) {
     this.name = name;
     this.size = size;
@@ -12,6 +15,7 @@ function Ship(name, size, hits=0) {
     this.hits = hits;
 }
 
+// Always waiting for the user to hit the 'new game' button and then acting on it whether a game is in progress or not
 $(document).ready(function(){
     $("#new-game").unbind().click(function() {
         if (playing === true) {
@@ -31,6 +35,7 @@ $(document).ready(function(){
     });
 });
 
+// The basic initialization and flow of the game, except for the components that need to be ran synchronously.
 function newGame() {
     console.log("Starting a new game!");
     playing = true;
@@ -45,6 +50,7 @@ function newGame() {
     placeOpponentShips();
 }
 
+// Creates a fleet consisting of the five ships used in the Hasbro game.
 function createFleet() {
     var carrier = new Ship("Carrier", 5);
     var battleship = new Ship("Battleship", 4);
@@ -56,6 +62,7 @@ function createFleet() {
     return fleet;
 }
 
+// The default board with with no ships placed that both the player and the opponent start out with.
 function createBoard() {
     /*
     *
@@ -81,6 +88,7 @@ function createBoard() {
     return board;
 }
 
+// Handles the placement of the opponent's ships. Done at random as long as the ship fits on the board.
 function placeOpponentShips() {
     var ship, orientation, x, y, shipLength;
     for (ship = 0; ship < 5; ship++) {
@@ -96,6 +104,8 @@ function placeOpponentShips() {
     placePlayerShips();
 }
 
+// Used to check placement for both the player and the opponent to make sure that a given starting position has enough
+// room for the ship to be placed.
 function placementCheck(board, fleet, shipNumber, shipLength, orientation, x, y) {
     var count = 0;
     var startX = x;
@@ -126,6 +136,7 @@ function placementCheck(board, fleet, shipNumber, shipLength, orientation, x, y)
     return true;
 }
 
+// Player places their ships one at a time and each one must be in a location where it fits and they can't stack.
 function placePlayerShips() {
     var ship = 0, orientation, x, y, shipLength;
 
@@ -167,6 +178,7 @@ function placePlayerShips() {
     });
 }
 
+// Check if an entered location is valid.
 function checkInputValue(value) {
     if (value.length != 2) {
         return false;
@@ -182,6 +194,9 @@ function checkInputValue(value) {
     return true;
 }
 
+// Opponent randomly guesses a location on each of their turns.
+// TODO: Improve the algorithm so that the opponent thinks more like a human would. ie, doesn't guess another completely
+// random location after finding a ship.
 function opponentTurn() {
     var x, y, pause;
 
@@ -234,6 +249,7 @@ function opponentTurn() {
     }
 }
 
+// Handles the player's turn before returning back to the opponent.
 function playerTurn() {
     $("#fire-button").removeClass("disabled");
     $("#fire-button").prop("disabled", false);
@@ -289,11 +305,14 @@ function playerTurn() {
             turns++;
             $("#fire-button").prop("disabled", true);
             $("#fire-button").addClass("disabled");
+            // Waits 3 seconds after the player's turn so that the user can see the result of their turn as well as
+            // making it feel like the user is playing somone and not a robot that guesses instantly.
             pause = setTimeout(opponentTurn, 3000);
         }
     });
 }
 
+// Function for finding coordinates within an array of coordinates.
 function locationInArray(container, target) {
     var container = container.map(JSON.stringify);
     var target = JSON.stringify(target);
@@ -305,6 +324,7 @@ function locationInArray(container, target) {
     return -1;
 }
 
+// Game has ended, and the designated winner is shown.
 function gameOver(winner) {
     $("#firing-container").css("display","none");
     if (winner === 1) {
@@ -316,6 +336,8 @@ function gameOver(winner) {
     }
 }
 
+// When a game ends and a new one is started, this function resets all of the graphics and functionallity to their
+// starting state.
 function resetGraphics() {
     $("span.marker").removeClass("hit");
     $("span.marker").removeClass("miss");
