@@ -13,7 +13,7 @@ function Ship(name, size, hits=0) {
 }
 
 $(document).ready(function(){
-    $("#new-game").click(function() {
+    $("#new-game").unbind().click(function() {
         if (playing === true) {
             if (confirm("Are you sure you wish to quit and start a new game?")) {
                 newGame();
@@ -38,6 +38,7 @@ function newGame() {
     opponentFleet = createFleet();
     playerBoard = createBoard();
     opponentBoard = createBoard();
+    resetGraphics();
     console.log("New game has been started.");
 
     $("#output-text").text("Your opponent is placing their ships. Hang tight.");
@@ -131,7 +132,7 @@ function placePlayerShips() {
     $("#output-text").text("Your opponent has placed their ships. It is now your turn to place your ships.");
     $("#ship-placement-container").css("display", "block");
 
-    $("#placement-button").click(function(){
+    $("#placement-button").unbind().click(function(){
         shipLength = playerFleet[ship].size;
         if ($("#orientation-indicator").hasClass("vertical")) {
             orientation = 1;
@@ -182,58 +183,60 @@ function checkInputValue(value) {
 }
 
 function opponentTurn() {
-    var x, y;
-    
-    x = Math.floor(Math.random() * 10);
-    y = Math.floor(Math.random() * 10);
+    var x, y, pause;
 
-    var target = [x, y];
-    var result = false;
+    if (playing === true) {
+        x = Math.floor(Math.random() * 10);
+        y = Math.floor(Math.random() * 10);
 
-    if (locationInArray(opponentGuesses, target) != -1) {
-        opponentTurn();
-    } else {
-        for (var i = 0; i < 5; i++) {
-            var array = playerFleet[i].coordinates;
-            var location = locationInArray(array, target);
-            if (location === -1) {
-                continue;
-            } else {
-                result = true;
-                break;
-            }
-        }
+        var target = [x, y];
+        var result = false;
 
-        if (result === false) {
-            $("#output-text").html("Whew, that was close! They missed.");
-            playerBoard[y][x] = 2;
-            $("#p-" + acceptedValues[y] + x + " > span").addClass("miss");
-            opponentGuesses.push(target);
+        if (locationInArray(opponentGuesses, target) != -1) {
+            opponentTurn();
         } else {
-            $("#output-text").html("Yikes! You've been hit.<br/><br/>They hit your " + playerFleet[i].name + ".");
-            playerBoard[y][x] = 3;
-            $("#p-" + acceptedValues[y] + x + " > span").addClass("hit");
-            $("#p" + playerFleet[i].name + " span:not(.hit):first").addClass("hit");
-            playerFleet[i].hits++;
-            if (playerFleet[i].hits === playerFleet[i].size) {
-                $("#output-text").html("Yikes! You've been hit.<br/><br/>They sunk your " + playerFleet[i].name + "!");
-                playerShipsLeft--;
-                $("#player-ships-remaining").text("Ships remaining: " + playerShipsLeft);
-                if (playerShipsLeft === 0) {
-                    // 0 = player wins, 1 = opponent wins
-                    gameOver(1)
+            for (var i = 0; i < 5; i++) {
+                var array = playerFleet[i].coordinates;
+                var location = locationInArray(array, target);
+                if (location === -1) {
+                    continue;
+                } else {
+                    result = true;
+                    break;
                 }
             }
-            playerGuesses.push(target);
+
+            if (result === false) {
+                $("#output-text").html("Whew, that was close! They missed.");
+                playerBoard[y][x] = 2;
+                $("#p-" + acceptedValues[y] + x + " > span").addClass("miss");
+                opponentGuesses.push(target);
+            } else {
+                $("#output-text").html("Yikes! You've been hit.<br/><br/>They hit your " + playerFleet[i].name + ".");
+                playerBoard[y][x] = 3;
+                $("#p-" + acceptedValues[y] + x + " > span").addClass("hit");
+                $("#p" + playerFleet[i].name + " span:not(.hit):first").addClass("hit");
+                playerFleet[i].hits++;
+                if (playerFleet[i].hits === playerFleet[i].size) {
+                    $("#output-text").html("Yikes! You've been hit.<br/><br/>They sunk your " + playerFleet[i].name + "!");
+                    playerShipsLeft--;
+                    $("#player-ships-remaining").text("Ships remaining: " + playerShipsLeft);
+                    if (playerShipsLeft === 0) {
+                        // 0 = player wins, 1 = opponent wins
+                        pause = setTimeout(gameOver, 2000, 1);
+                    }
+                }
+                opponentGuesses.push(target);
+            }
+            turns++;
+            playerTurn();
         }
-        turns++;
-        $("#fire-button").prop("disabled", false);
-        playerTurn();
     }
 }
 
 function playerTurn() {
     $("#fire-button").removeClass("disabled");
+    $("#fire-button").prop("disabled", false);
     var x, y, pause;
     $("#fire-button").unbind().click(function() {
         var inputValue = $("#fire-location").val();
@@ -278,7 +281,7 @@ function playerTurn() {
                     $("#opponent-ships-remaining").text("Ships remaining: " + opponentShipsLeft);
                     if (opponentShipsLeft === 0) {
                         // 0 = player wins, 1 = opponent wins
-                        gameOver(0)
+                        var end = setTimeout(gameOver, 2000, 0);
                     }
                 }
                 playerGuesses.push(target);
@@ -304,4 +307,27 @@ function locationInArray(container, target) {
 
 function gameOver(winner) {
     $("#firing-container").css("display","none");
+    if (winner === 1) {
+        $("#output-text").html("Oh no! All of your ships have been sunk and you have been defeated.<br/><br/>Press the 'New Game' button when you are ready to play again.");
+        playing = false;
+    } else {
+        $("#output-text").html("Congratulations! You've sunk all of the enemy ships and have won the battle!<br/><br/>Press the 'New Game' button when you are ready to play again.");
+        playing = false;
+    }
+}
+
+function resetGraphics() {
+    $("span.marker").removeClass("hit");
+    $("span.marker").removeClass("miss");
+    $("div.space").removeClass("ship-space");
+    opponentShipsLeft = 5;
+    playerShipsLeft = 5;
+    turns = 0;
+    playerGuesses = [];
+    opponentGuesses = [];
+    $("#opponent-ships-remaining").text("Ships remaining: " + opponentShipsLeft);
+    $("#player-ships-remaining").text("Ships remaining: " + playerShipsLeft);
+    $(".ship-marker").removeClass("hit");
+    $("#ship-label > span").attr("id", "place-" + playerFleet[0].name).text(playerFleet[0].name);
+
 }
