@@ -1,4 +1,4 @@
-// Initialize variables that are used throughout to track progression of the game and also aid in reseting for a new game.
+// Initialize variables that are used throughout to track progression of the game and also aid in resetting for a new game.
 var playing = false;
 var playerFleet, opponentFleet, playerBoard, opponentBoard, playerShipsLeft = 5, opponentShipsLeft = 5, turns = 0;
 var playerGuesses = [];
@@ -306,7 +306,7 @@ function playerTurn() {
             $("#fire-button").prop("disabled", true);
             $("#fire-button").addClass("disabled");
             // Waits 3 seconds after the player's turn so that the user can see the result of their turn as well as
-            // making it feel like the user is playing somone and not a robot that guesses instantly.
+            // making it feel like the user is playing someone and not a robot that guesses instantly.
             pause = setTimeout(opponentTurn, 3000);
         }
     });
@@ -336,7 +336,7 @@ function gameOver(winner) {
     }
 }
 
-// When a game ends and a new one is started, this function resets all of the graphics and functionallity to their
+// When a game ends and a new one is started, this function resets all of the graphics and functionality to their
 // starting state.
 function resetGraphics() {
     $("span.marker").removeClass("hit");
